@@ -1,0 +1,59 @@
+{% extends 'basic.html' %}
+{% block title %}{{cat.c_title}} - EasyTube.com{% endblock title %}
+
+
+{% block body %}
+<section class="text-gray-400 bg-gray-900 body-font">
+  <div class="container px-5 py-5 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">{{cat.c_title}}</h1>
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{cat.c_desc}}</p>
+    </div>
+  </div>
+</section>
+
+ 
+
+<section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
+  <div class="container px-5 py-0 mx-auto">
+    <div class="-my-8 divide-y-2 divide-gray-800">
+
+{% for v in vi %}
+      <div class="py-8 flex border-t-2 border-gray-800 flex-wrap md:flex-nowrap">
+      <a href="/vplay/{{v.v_id}}">
+      <div class="flex flex-col sm:flex-row">
+        <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+          <img alt="gallery" class="inset-0 w-full h-100 object-center" src="/media/{{v.v_image}}">
+        </div>
+        <div class="md:flex-grow ml-10">
+          <h2 class="text-2xl font-medium text-white title-font mb-2">{{v.v_title}}</h2>
+          <p class="leading-relaxed">{{v.v_desc}}</p>
+        </div>
+        </div>
+        </a>
+      </div>
+{% endfor %}
+
+
+    </div>
+  </div>
+  <div class="my-4">
+      <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center pagination-lg">
+      {% if vi.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{vi.previous_page_number}}">&laquo; Previous</a>
+        </li>
+      {% endif %}
+        <li class="page-item"><a class="page-link" href="">{{vi.number}}</a></li>
+      {% if vi.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{vi.next_page_number}}">Next &raquo;</a>
+        </li>
+      {% endif %}
+      </ul>
+    </nav>
+    </div>
+</section>
+
+{% endblock body %}

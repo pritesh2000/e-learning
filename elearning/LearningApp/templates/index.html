@@ -1,0 +1,74 @@
+{% extends 'basic.html' %} 
+
+{% block title %}Home - EasyTube.com{% endblock title %} 
+
+
+{%block body %}
+{% load static %}
+  <section class="text-gray-400 body-font bg-gray-900">
+    <div class="container px-5 py-5 mt-auto">
+
+
+    
+      <div class="flex flex-wrap w-full mb-20">
+        <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">
+            <span id="typed"></span>
+          </h1>
+          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+        </div>
+        <p
+          class="lg:w-1/2 w-full leading-relaxed text-gray-400 text-opacity-90"
+        >
+          People expect to be bored by eLearning—let’s show them it doesn’t have to be like that!
+          Online learning is not the next big thing, it is the now big thing.
+          Teachers need to integrate technology seamlessly into the curriculum instead of viewing it as an add-on, an afterthought, or an event.
+        </p>
+      </div>
+
+    <div class="flex flex-wrap -m-4">
+
+      {% for cat in category_data %}
+
+
+      
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+          <a href="/catinfo/{{cat.c_id}}/">
+            <img
+              class="h-40 rounded w-full object-cover object-center mb-6"
+              src="/media/{{cat.c_image}}"
+              alt="content"
+            />
+            <h2 class="text-lg text-white font-medium title-font mb-4">
+              {{cat.c_title}}
+            </h2>
+            <p class="leading-relaxed text-base">
+              {{cat.c_desc|slice:"0:100"}}...
+            </p>
+            </a>
+          </div>
+        </div>
+
+        {% endfor %}
+
+
+
+  </div>
+</section>
+{% endblock body %}
+ {% block js %}
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typed.js"></script>
+ <script>
+     var typed = new Typed("#typed",{
+                    strings:["Welcome {{request.user}} To EasyTube.com","Click on Any Video Category And start learning"],
+                    backSpeed: 15,
+                    smartBackspace: true,
+                    backDelay: 1200,
+                    startDelay: 1,
+                    typeSpeed: 25,
+                    loop: true,
+
+                  });
+    </script>
+ {% endblock js %}
